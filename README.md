@@ -7,12 +7,13 @@ Be sure to also check out my Not-So-Simple TODO list: https://github.com/amadeus
 
 Features
 --------
--Flatfile database (one file)
--Add, Complete, Remove options
--Basic file locking mechanism to make sure one developer updates at a time (avoids confusion)
--Easy to integrate into site template/design (v0.1.1)
--Security available through directory protection (.htaccess) not included.
-
+<ul>
+<li>Flatfile database (one file)</li>
+<li>Add, Complete, Remove options</li>
+<li>Basic file locking mechanism to make sure one developer updates at a time (avoids confusion)</li>
+<li>Easy to integrate into site template/design (v0.1.1)</li>
+<li>Security available through directory protection (.htaccess) not included.</li>
+</ul>
 
 Demo & Use
 -------------
