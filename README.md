@@ -21,13 +21,13 @@ The script is ready to run "out-of-the-box", as long as the $file is writeable.
 
 Visit http://amadeus.maclab.org/_demo/todo-0.1.2/ to see a live demo (resets hourly).
 
-Revision History pre-GitHub
----------------------------
-0.1.2
-Added "Toggle All", improved form control elements (pressing return adds a new entry).
+Revision History
+----------------
+<p><b>0.1.2</b><br>
+Added "Toggle All", improved form control elements (pressing return adds a new entry).</p>
 
-0.1.1
-Included easy HTML integration.
+<p><b>0.1.1</b><br>
+Included easy HTML integration.</p>
 
-0.1
-First release.
+<p><b>0.1</b><br>
+First release.</p>
