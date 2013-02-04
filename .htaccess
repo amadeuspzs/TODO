@@ -1,0 +1,7 @@
+<Files include.inc>
+deny from all
+</Files>
+
+<Files settings.inc>
+deny from all
+</Files>
