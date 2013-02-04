@@ -5,7 +5,7 @@
 NSS-TODO list
 
 --------------------------------------------------------------------
-Copyright (c) 2005 Amadeus Stevenson, http://poff.sixbit.org
+Copyright (c) 2005-2013 Amadeus Stevenson, http://amadeus.maclab.org
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
