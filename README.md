@@ -4,7 +4,9 @@ NSS-TODO-CJ List (v1.0)
 Small PHP web script to allow multiple developers on a project maintain a communal TODO list to help development, with useful features.
 
 Thanks to Andrew Chapman/ThoughtPlay for funding/ideas.
+
 Be sure to check out my cron job-less version of this script here.
+
 Be sure to check out the simplified version of this script here.
 
 Features
@@ -24,6 +26,7 @@ Features
 
 Demo & Installation
 -------------
+<ul>
 <li>Unzip files to your todo directory</li>
 <li>Make sure todo.list and categories.list are writeable by your web server</li>
 <li>Open and modify settings.inc to suit your needs</li>
@@ -31,6 +34,7 @@ Demo & Installation
 <pre>
 10 5 * * *	/path/to/php4/executable -f /path/to/todo/list/cron.php
 </pre></li>
+</ul>
 
 Visit http://amadeus.maclab.org/_demo/nss-todo-cj-1.0/ to see a live demo (resets hourly).
 
