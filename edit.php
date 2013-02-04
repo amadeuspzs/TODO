@@ -2,10 +2,10 @@
 
 /*
 
-NSS-TODO list
+NSS-TODO-CJ list
 
 --------------------------------------------------------------------
-Copyright (c) 2005-2013 Amadeus Stevenson, http://amadeus.maclab.org
+Copyright (c) 2005 Amadeus Stevenson, http://poff.sixbit.org
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -68,6 +68,20 @@ if ( isset ( $_POST["submit"] ) && $_POST["ohash"] == $hash ) { // UPDATE TODO I
 	else
 		$todo_list[$tid]["duedate"] = NULL;
 
+	if ( isset ( $_POST["emaildue"] ) )
+		$todo_list[$tid]["emailreminder"]="Y";
+	else
+		$todo_list[$tid]["emailreminder"]=NULL;
+
+	$todo_list[$tid]["emailfreq"]=$_POST["reminder_frequency"];
+
+	if ( $_POST["reminder_day"] !== "None" && !empty ( $_POST["reminder_day"] ) && $_POST["reminder_month"] !== "None" && !empty ( $_POST["reminder_month"] ) )
+		$todo_list[$tid]["startemailfrom"] = mktime ( 0 , 0, 0, $_POST["reminder_month"], $_POST["reminder_day"] , $_POST["reminder_year"] );
+	else
+		$todo_list[$tid]["startemailfrom"] = NULL;
+
+	$todo_list[$tid]["emailto"]=$_POST["emailto"];
+
 	writeTODO ( $todo_list );
 
 	header("Location: index.php"); exit;
@@ -85,6 +99,12 @@ if ( !empty ( $tdata["duedate"] ) ) {
 	$due_year = date ( "Y" , $tdata["duedate"] );
 }
 
+if ( !empty ( $tdata["startemailfrom"] ) ) {
+	$reminder_day = date ( "d" , $tdata["startemailfrom"] );
+	$reminder_month = date ( "m" , $tdata["startemailfrom"] );
+	$reminder_year = date ( "Y" , $tdata["startemailfrom"] );
+}
+
 ?>
 <form action="edit.php" method="POST" name="todo">
 <input type="hidden" name="ohash" value="<?php echo $hash ?>" />
@@ -94,9 +114,16 @@ Categories: <span style='color: red; padding: 2px'>Overdue</span> <?php foreach 
 echo "<span style='color: {$data['code']}; padding: 2px;'>{$data['title']}</span> ";
 }?><br /><br />
 
-<input type="text" name="data" value="<?php echo htmlentities ( $tdata["text"] ) ?>" size="35" />
+<input type="text" name="data" value="<?php echo htmlentities ( $tdata["text"] )?>" size="35" />
 <input type="submit" name="submit" value="Update" /> 
 
+<select name="emailto">
+<?php foreach ( $email_list as $aname => $aemail ) { ?>
+<option value='<?php echo $aname?>'<?php echo ( $aname == $tdata["emailto"] ) ? " selected" : NULL?>><?php echo $aname?></option>
+<?php } ?>
+</select>
+
+<br /><br />
 Category: <select name="category"><option>None</option>
 <?php
 foreach ( $category_list as $cid => $data ) {
@@ -127,7 +154,7 @@ Due:
 <select name="due_month">
 <option>None</option>
 <?php for ( $i=1; $i<=12; $i++ ) {
-	$month = date ( "M", mktime ( 0 , 0 , 0 , $i ) );
+	$month = date ( "M", mktime ( 0 , 0 , 0 , $i, 1 ) );
 	echo "<option value='$i'";
 
 	if ( $i == @$due_month )
@@ -142,5 +169,58 @@ Due:
 <option <?php echo ( @$due_year == ( date ( "Y" ) ) ) ? "selected" : NULL?> value='<?php echo date ( "Y" )?>'><?php echo date ( "Y" )?></option>
 <option <?php echo ( @$due_year == ( date ( "Y" ) + 1) ) ? "selected" : NULL?> value='<?php echo date ( "Y" ) + 1?>'><?php echo date ( "Y" ) + 1?></option>
 </select>
+
+Email? <input type='checkbox' <?php echo empty ( $tdata["emailreminder"] ) ? NULL : "checked" ?> name='emaildue' /> 
+
+
+
+Reminder from:
+
+<select name="reminder_day">
+<option>None</option>
+<?php for ( $i=1; $i<=31; $i++ ) {
+	echo "<option value='$i'";
+
+	if ( $i == @$reminder_day )
+		echo " selected";
+
+	echo ">$i</option>";
+}
+?>
+</select>
+
+<select name="reminder_month">
+<option>None</option>
+<?php for ( $i=1; $i<=12; $i++ ) {
+	$month = date ( "M", mktime ( 0 , 0 , 0 , $i, 1 ) );
+	echo "<option value='$i'";
+
+	if ( $i == @$reminder_month )
+		echo " selected";
+
+	echo ">$month</option>";
+}
+?>
+</select>
+
+<select name="reminder_year">
+<option <?php echo ( @$reminder_year == (date ( "Y" ) )) ? "selected" : NULL?> value='<?php echo date ( "Y" )?>'><?php echo date ( "Y" )?></option>
+<option <?php echo ( @$reminder_year == (date ( "Y" ) + 1)) ? "selected" : NULL?> value='<?php echo date ( "Y" ) + 1?>'><?php echo date ( "Y" ) + 1?></option>
+</select>
+
+every
+<select name="reminder_frequency">
+<option value="1"<?php echo ( $tdata["emailfreq"] == "1" ) ? " selected" : NULL?>>1</option>
+<option value="2"<?php echo ( $tdata["emailfreq"] == "2" ) ? " selected" : NULL?>>2</option>
+<option value="3"<?php echo ( $tdata["emailfreq"] == "3" ) ? " selected" : NULL?>>3</option>
+<option value="4"<?php echo ( $tdata["emailfreq"] == "4" ) ? " selected" : NULL?>>4</option>
+<option value="5"<?php echo ( $tdata["emailfreq"] == "5" ) ? " selected" : NULL?>>5</option>
+<option value="7"<?php echo ( $tdata["emailfreq"] == "7" ) ? " selected" : NULL?>>7</option>
+<option value="30"<?php echo ( $tdata["emailfreq"] == "30" ) ? " selected" : NULL?>>30</option>
+<option value="60"<?php echo ( $tdata["emailfreq"] == "60" ) ? " selected" : NULL?>>60</option>
+<option value="90"<?php echo ( $tdata["emailfreq"] == "90" ) ? " selected" : NULL?>>90</option>
+<option value="183"<?php echo ( $tdata["emailfreq"] == "183" ) ? " selected" : NULL?>>183</option>
+<option value="365"<?php echo ( $tdata["emailfreq"] == "365" ) ? " selected" : NULL?>>365</option>
+</select> days
 
 </form>

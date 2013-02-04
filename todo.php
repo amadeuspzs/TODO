@@ -2,10 +2,10 @@
 
 /*
 
-NSS-TODO list
+NSS-TODO-CJ list
 
 --------------------------------------------------------------------
-Copyright (c) 2005-2013 Amadeus Stevenson, http://amadeus.maclab.org
+Copyright (c) 2005 Amadeus Stevenson, http://poff.sixbit.org
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -198,6 +198,16 @@ if ( $_POST["submit"] == "Add category" || isset ( $_GET["categorydata"] ) ) { /
 
 			if ( $_POST["due_day"] !== "None" && !empty ( $_POST["due_day"] ) && $_POST["due_month"] !== "None" && !empty ( $_POST["due_month"] ) )
 				$todo_list[$ntid]["duedate"] = mktime ( 0 , 0, 0, $_POST["due_month"], $_POST["due_day"] , $_POST["due_year"] );
+
+			if ( isset ( $_POST["emaildue"] ) )
+				$todo_list[$ntid]["emailreminder"]="Y";
+
+			$todo_list[$ntid]["emailfreq"]=$_POST["reminder_frequency"];
+
+			if ( $_POST["reminder_day"] !== "None" && !empty ( $_POST["reminder_day"] ) && $_POST["reminder_month"] !== "None" && !empty ( $_POST["reminder_month"] ) )
+				$todo_list[$ntid]["startemailfrom"] = mktime ( 0 , 0, 0, $_POST["reminder_month"], $_POST["reminder_day"] , $_POST["reminder_year"] );
+
+			$todo_list[$ntid]["emailto"]=$_POST["emailto"];
 
 			writeTODO ( $todo_list );
 

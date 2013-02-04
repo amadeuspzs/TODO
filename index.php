@@ -2,10 +2,10 @@
 
 /*
 
-NSS-TODO list
+NSS-TODO-CJ list
 
 --------------------------------------------------------------------
-Copyright (c) 2005-2013 Amadeus Stevenson, http://amadeus.maclab.org
+Copyright (c) 2005 Amadeus Stevenson, http://poff.sixbit.org
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -91,7 +91,7 @@ function getStyle()
 $hash = @sha1_file ( $file );
 
 ?>
-<b>NSS-TODO List v <?php echo $version?></b><br />
+<b>NSS-TODO List with Cron v <?php echo $version?></b><br />
 Updated: <?php echo date ("F d Y H:i:s T", $modified ); ?>, ~ <?php echo timeSince ( $modified );?><br />
 <hr />
 <form action="todo.php" method="POST" name="todo">
@@ -108,7 +108,7 @@ Updated: <?php echo date ("F d Y H:i:s T", $modified ); ?>, ~ <?php echo timeSin
 		echo "<a title='Edit' style='text-decoration: none' href='edit.php?id=$tid'>&nbsp;</a>";
 		echo "<input type='checkbox' name='todo[$tid]' />";
 
-		if ( !empty ( $data["duedate"] ) && $data["duedate"] < time() && $data["status"] !== "c" )
+		if ( !empty ( $data["duedate"] ) && $data["duedate"] < time() && $data["status"] !== "c")
 			$overdue = 1;
 		else
 			$overdue = 0;
@@ -163,6 +163,24 @@ echo "<a style='text-decoration: none; color: black' title='Remove this category
 
 <span id="extra" style="margin-left: 10px; visibility: <?php echo empty ( $_REQUEST["extra"]) ? $extras_default : $_REQUEST["extra"]?>">
 
+<select name="emailto">
+<?php foreach ( $email_list as $name => $email ) { ?>
+<option value='<?php echo $name?>'><?php echo $name?></option>
+<?php } ?>
+</select>
+
+<input type="text" name="categorydata" size="35" />
+<input type="submit" name="submit" value="Add category" />
+<select name="colour">
+<option>None</option>
+<?php
+foreach ( $category_colours as $name => $hex ) {
+	echo "<option value=\"$hex\">$name</option>";
+}
+?>
+</select>
+
+<br /><br />
 Category: <select name="category"><option>None</option>
 <?php
 foreach ( $category_list as $cid => $data ) {
@@ -183,7 +201,7 @@ Due:
 <select name="due_month">
 <option>None</option>
 <?php for ( $i=1; $i<=12; $i++ ) {
-	$month = date ( "M", mktime ( 0 , 0 , 0 , $i ) );
+	$month = date ( "M", mktime ( 0 , 0 , 0 , $i, 1 ) );
 	echo "<option value='$i'>$month</option>";
 }
 ?>
@@ -194,17 +212,38 @@ Due:
 <option value='<?php echo date ( "Y" ) + 1?>'><?php echo date ( "Y" ) + 1?></option>
 </select>
 
-<br /><br />
-<input type="text" name="categorydata" size="35" />
-<input type="submit" name="submit" value="Add category" />
-<select name="colour">
+Email? <input type='checkbox' name='emaildue' /> 
+
+
+
+Reminder from:
+
+<select name="reminder_day">
 <option>None</option>
-<?php
-foreach ( $category_colours as $name => $hex ) {
-	echo "<option value=\"$hex\">$name</option>";
+<?php for ( $i=1; $i<=31; $i++ ) {
+	echo "<option value='$i'>$i</option>";
 }
 ?>
 </select>
+
+<select name="reminder_month">
+<option>None</option>
+<?php for ( $i=1; $i<=12; $i++ ) {
+	$month = date ( "M", mktime ( 0 , 0 , 0 , $i, 1 ) );
+	echo "<option value='$i'>$month</option>";
+}
+?>
+</select>
+
+<select name="reminder_year">
+<option value='<?php echo date ( "Y" )?>'><?php echo date ( "Y" )?></option>
+<option value='<?php echo date ( "Y" ) + 1?>'><?php echo date ( "Y" ) + 1?></option>
+</select>
+
+every
+<select name="reminder_frequency"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="7">7</option><option value="30">30</option><option value="60">60</option><option value="90">90</option><option value="183">183</option><option value="365">365</option></select> days
+
+<br /><br />
 </form>
 
 </span>

@@ -2,10 +2,10 @@
 
 /*
 
-NSS-TODO list
+NSS-TODO-CJ list
 
 --------------------------------------------------------------------
-Copyright (c) 2005-2013 Amadeus Stevenson, http://amadeus.maclab.org
+Copyright (c) 2005 Amadeus Stevenson, http://poff.sixbit.org
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -43,12 +43,16 @@ function loadTODO () {
 	$data = @file ( $file );
 
 	foreach ( $data as $line ) {
-		list ( $tid, $status, $text, $cid, $duedate ) = split ( "\|" , trim ( $line ) );
+		list ( $tid, $status, $text, $cid, $duedate,$emailreminder,$startemailfrom,$emailfreq,$emailto ) = split ( "\|" , trim ( $line ) );
 
 		$todo_list[$tid]["status"]=$status;
 		$todo_list[$tid]["text"]=$text;
 		$todo_list[$tid]["cid"]=$cid;
 		$todo_list[$tid]["duedate"]=$duedate;
+		$todo_list[$tid]["emailreminder"]=$emailreminder;
+		$todo_list[$tid]["startemailfrom"]=$startemailfrom;
+		$todo_list[$tid]["emailfreq"]=$emailfreq;
+		$todo_list[$tid]["emailto"]=$emailto;
 
 	}
 
@@ -65,7 +69,7 @@ function writeTODO( $todo_list ) {
 	$fp = fopen ( $file , "w" ) or die ("Can't open todo list for writing");
 
 	foreach ( $todo_list as $tid => $data ) {
-		fwrite ( $fp, "$tid|{$data['status']}|{$data['text']}|{$data['cid']}|{$data['duedate']}\r\n" );
+		fwrite ( $fp, "$tid|{$data['status']}|{$data['text']}|{$data['cid']}|{$data['duedate']}|{$data['emailreminder']}|{$data['startemailfrom']}|{$data['emailfreq']}|{$data['emailto']}\r\n" );
 	}
 
 	fclose ( $fp );

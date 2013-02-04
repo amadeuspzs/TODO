@@ -2,10 +2,10 @@
 
 /*
 
-NSS-TODO list
+NSS-TODO-CJ list
 
 --------------------------------------------------------------------
-Copyright (c) 2005-2013 Amadeus Stevenson, http://amadeus.maclab.org
+Copyright (c) 2005 Amadeus Stevenson, http://poff.sixbit.org
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without

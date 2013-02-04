@@ -2,10 +2,10 @@
 
 /*
 
-NSS-TODO list
+NSS-TODO-CJ list
 
 --------------------------------------------------------------------
-Copyright (c) 2005-2013 Amadeus Stevenson, http://amadeus.maclab.org
+Copyright (c) 2005 Amadeus Stevenson, http://poff.sixbit.org
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -31,6 +31,17 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 */
+
+// Email addresses and names for reminders
+// The first email address is the default
+
+$email_list = Array ( 
+	"Amadeus" => "poff@sixbit.org",
+	"Bob" => "bob@bob.org" );
+
+// Address of your installed script (for email messages)
+
+$url = "http://poff.sixbit.org/demo/nss-todo-cj-1.0/";
 
 // Where the list is stored:
 
