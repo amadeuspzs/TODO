@@ -127,7 +127,7 @@ Due:
 <select name="due_month">
 <option>None</option>
 <?php for ( $i=1; $i<=12; $i++ ) {
-	$month = date ( "M", mktime ( 0 , 0 , 0 , $i ) );
+	$month = date ( "M", mktime ( 0 , 0 , 0 , $i, 1 ) );
 	echo "<option value='$i'";
 
 	if ( $i == @$due_month )
