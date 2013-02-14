@@ -3,11 +3,11 @@ NSS-TODO-CJ List (v1.0)
 
 Small PHP web script to allow multiple developers on a project maintain a communal TODO list to help development, with useful features.
 
-Thanks to Andrew Chapman/ThoughtPlay for funding/ideas.
+Thanks to Andrew Chapman/<a href="http://www.thoughtplay.com/">ThoughtPlay</a> for funding/ideas.
 
-Be sure to check out my cron job-less version of this script here.
+Be sure to check out my cron job-less version of this script: https://github.com/amadeuspzs/TODO/tree/NSS-TODO
 
-Be sure to check out the simplified version of this script here.
+Be sure to check out the simplified version of this script: https://github.com/amadeuspzs/TODO
 
 Features
 --------
