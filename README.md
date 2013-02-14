@@ -1,4 +1,4 @@
-NSS-TODO List (v1.0)
+NSS-TODO List (v1.1)
 =======================
 
 Small PHP web script to allow multiple developers on a project maintain a communal TODO list to help development, with useful features.
@@ -24,7 +24,7 @@ Demo & Use
 -------------
 The script is ready to run "out-of-the-box", as long as the $files in settings.inc are writeable.
 
-Visit http://amadeus.maclab.org/_demo/nss-todo-1.0/ to see a live demo (resets hourly).
+Visit http://amadeus.maclab.org/_demo/nss-todo-1.1/ to see a live demo (resets hourly).
 
 Tips
 ----
@@ -38,5 +38,8 @@ Tips
 
 Revision History
 ----------------
+<p><b>1.1</b>
+Minor bugfix.</p>
+
 <p><b>1.0</b>
 First release.</p>
